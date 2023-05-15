@@ -21,13 +21,13 @@
 
 
 module RX_TRANS_LAYER (
-  input wire clk,
-  input wire reset_n,
+  input wire                  clk,
+  input wire                  reset_n,
   
   //data link layer interface
-  input wire [31:0] tlp_data_in,
-  input wire tlp_data_in_valid,
-  output reg tlp_data_in_ready,
+  input wire [31:0]           tlp_data_in,
+  input wire                  tlp_data_in_valid,
+  output reg                  tlp_data_in_ready,
   
   //software interface
   AXI_R_IF.SRC                axi_r_if
