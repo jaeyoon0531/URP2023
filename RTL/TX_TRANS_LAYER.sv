@@ -15,8 +15,8 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 module TX_TRANS_LAYER (
-  input wire clk,
-  input wire reset_n,
+  input wire          clk,
+  input wire          reset_n,
   
   //software interface
   AXI_W_IF.DST        axi_w_if,
@@ -24,9 +24,9 @@ module TX_TRANS_LAYER (
   AXI_A_IF.DST        axi_ar_if,
   
   //data link layer interface
-  output reg [63:0] tlp_out,
-  output reg tlp_out_valid,
-  input  reg tlp_in_ready
+  output reg [63:0]   tlp_out,
+  output reg          tlp_out_valid,
+  input  reg          tlp_in_ready
   
 );
 
