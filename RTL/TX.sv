@@ -20,20 +20,20 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 module TX (
-    input wire clk,
-    input wire reset_n,
+    input wire              clk,
+    input wire              reset_n,
     // Transaction Layer Interface
-    AXI_W_IF.DST        axi_w_if,
-    AXI_A_IF.DST        axi_aw_if,
-    AXI_A_IF.DST        axi_ar_if,
+    AXI_W_IF.DST            axi_w_if,
+    AXI_A_IF.DST            axi_aw_if,
+    AXI_A_IF.DST            axi_ar_if,
     
      
     // Data Link Layer Interface
-    output wire [31:0] rx_tlp_data,
-    output wire rx_tlp_valid,
-    input wire rx_tlp_ready,
-    input wire ack,
-    input wire nack
+    output wire [31:0]      rx_tlp_data,
+    output wire             rx_tlp_valid,
+    input wire              rx_tlp_ready,
+    input wire              ack,
+    input wire              nack
     
 );
 
