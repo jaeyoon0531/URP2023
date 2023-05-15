@@ -21,23 +21,23 @@
 
 
 module RX (
-    input wire clk,
-    input wire reset_n,
+    input wire                  clk,
+    input wire                  reset_n,
     
     // Data Link Layer Interface
-    input wire [31:0] rx_tlp_data,
-    input wire rx_tlp_valid,
-    output wire rx_tlp_ready,
-    output wire ack,
-    output wire nack,
+    input wire [31:0]           rx_tlp_data,
+    input wire                  rx_tlp_valid,
+    output wire                 rx_tlp_ready,
+    output wire                 ack,
+    output wire                 nack,
     
     // Transaction Layer Interface
     AXI_R_IF.SRC                axi_r_if
 );
 
-    wire [31:0]             out_data_dll;
-    wire                    out_valid_dll;
-    wire                    in_ready_dll;                 
+    wire [31:0]                out_data_dll;
+    wire                       out_valid_dll;
+    wire                       in_ready_dll;                 
  
  
     // Instantiate Data Link Layer
