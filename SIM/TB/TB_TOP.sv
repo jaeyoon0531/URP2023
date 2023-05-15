@@ -134,7 +134,7 @@ module TOP;
         if (rresp!==2'b00) begin $display("Non-OK response (received: %d)", rresp); $finish; end
     endtask
 
-    //R TLP
+    //AR TLP
     task automatic read32B(
         input [`AXI_ADDR_WIDTH-1:0] addr,
         output [255:0]              data
