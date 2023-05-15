@@ -21,20 +21,20 @@
 
 
 module RX_DATA_LINK_LAYER(
-    input wire clk,
-    input wire reset_n,
+    input wire                      clk,
+    input wire                      reset_n,
     
     // Physical Layer interface
-    input wire [31:0] tlp_data_in,
-    input wire tlp_data_in_valid,
-    output wire tlp_data_in_ready,
-    output wire ack,
-    output wire nack,
+    input wire [31:0]               tlp_data_in,
+    input wire                      tlp_data_in_valid,
+    output wire                     tlp_data_in_ready,
+    output wire                     ack,
+    output wire                     nack,
     
     // Transaction Layer interface
-    output wire [47:0] tlp_data_out,
-    output wire tlp_data_out_valid,
-    input wire tlp_data_out_ready
+    output wire [47:0]              tlp_data_out,
+    output wire                     tlp_data_out_valid,
+    input wire                      tlp_data_out_ready
     );
     
 
