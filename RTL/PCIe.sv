@@ -73,8 +73,7 @@ module PCIe
         .header_length_o            (header_length),
         .header_requestID_o         (header_requestID),
         .header_completID_o         (header_completID),
-        .ch0_start_o                (start_vec),
-        .ch0_done_i                 (done_vec)
+        .ch0_start_o                (start_vec)
     );
     
     
