@@ -29,7 +29,7 @@ module TX (
     
      
     // Data Link Layer Interface
-    output wire [31:0]      rx_tlp_data,
+    output wire [127:0]     rx_tlp_data,
     output wire             rx_tlp_valid,
     input wire              rx_tlp_ready,
     input wire              ack,
