@@ -16,14 +16,14 @@ module TOP;
 
     // reset generation
     initial begin
-        
+        // activate the reset (active low)
         rst_n                       = 1'b0;
         repeat (3) @(posedge clk);
-        
+        // release the reset after 10 cycles
         rst_n                       = 1'b1;
     end
     
-    //APB_IF                          apb_if      (.clk(clk), .rst_n(rst_n));
+    APB_IF                          apb_if      (.clk(clk), .rst_n(rst_n));
 
     // AXI interface    
     AXI_A_IF                        axi_ar_if   (.clk(clk), .rst_n(rst_n));
@@ -33,57 +33,27 @@ module TOP;
     AXI_B_IF                        axi_b_if    (.clk(clk), .rst_n(rst_n));
     
     
-
     axi_id_t                        simple_id;
     axi_id_t                        rid;
     axi_resp_t                      rresp;
- 
 
-    //=========================================================
-    //  Tx ~ RX
-    //=========================================================
-    wire [31:0]             out_TX_to_RX;
-    wire                    out_valid_TX_to_RX;
-    wire                    in_ready_RX_to_TX;   
-    wire                    ack;
-    wire                    nack;
-    
-    
-    
-    TX              u_tx (
-        .clk(clk),
-        .reset_n(reset_n),
-    // Transaction Layer Interface
-        .axi_w_if(axi_w_if),
-        .axi_aw_if(axi_aw_if),
-        .axi_ar_if(axi_ar_if),
-        
-    
-    // Data Link Layer Interface
-        .rx_tlp_data(out_TX_to_RX),
-        .rx_tlp_valid(out_valid_TX_to_RX),
-        .rx_tlp_ready(in_ready_RX_to_TX),
-        .ack(ack),
-        .nack(nack)
+
+    PCIe                            u_pcie
+    (
+        .clk                        (clk),
+        .rst_n                      (rst_n),
+
+        // APB interface
+        .apb_if                     (apb_if),
+
+        // AXI interface
+        .axi_ar_if                  (axi_ar_if),
+        .axi_aw_if                  (axi_aw_if),
+        .axi_w_if                   (axi_w_if),
+        .axi_b_if                   (axi_b_if),
+        .axi_r_if                   (axi_r_if)
     );
-    
-    
-    RX              u_rx (
-        .clk(clk),
-        .reset_n(reset_n),
-        
-    // Data Link Layer Interface
-        .rx_tlp_data(out_TX_to_RX),
-        .rx_tlp_valid(out_valid_TX_to_RX),
-        .rx_tlp_ready(in_ready_RX_to_TX),
-        .ack(ack),
-        .nack(nack),
-        
-    // Transaction Layer Interface
-        .axi_r_if(axi_r_if),
-             
-    );        
-    
+
     
     task init();
         axi_aw_if.init();
@@ -134,7 +104,7 @@ module TOP;
         if (rresp!==2'b00) begin $display("Non-OK response (received: %d)", rresp); $finish; end
     endtask
 
-    //AR TLP
+    //R TLP
     task automatic read32B(
         input [`AXI_ADDR_WIDTH-1:0] addr,
         output [255:0]              data
@@ -162,7 +132,7 @@ module TOP;
         write32B('d0,   {8{32'h01234567}});
         write32B('d32,  {8{32'h01234567}});
         
-        //AR
+        
         read32B('d0, data);
         read32B('d32, data);
 
