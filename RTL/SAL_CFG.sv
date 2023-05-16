@@ -32,12 +32,12 @@ module SAL_CFG
     APB_IF.SLV                  apb_if,
     
     // configuration registers for CH0
-    output  reg     [2:0]       header_fmt_o,
-    output  reg     [4:0]       header_type_o,
-    output  reg     [2:0]       header_tc_o,
-    output  reg     [8:0]       header_length_o,
-    output  reg     [15:0]      header_requestID_o,
-    output  reg     [15:0]      header_completID_o,
+    output  reg     [2:0]       header_fmt_c,
+    output  reg     [4:0]       header_type_c,
+    output  reg     [2:0]       header_tc_c,
+    output  reg     [8:0]       header_length_c,
+    output  reg     [15:0]      header_requestID_c,
+    output  reg     [15:0]      header_completID_c,
     output  wire                ch0_start_o
    
 );
@@ -69,7 +69,7 @@ module SAL_CFG
                 'h100: header_tc            <= apb_if.pwdata[10:8]; 
                 'h100: header_length        <= apb_if.pwdata[17:9];
                 'h104: header_requestID     <= apb_if.pwdata[15:0];
-                'h104: header_completID     <= apb_if.pwdata[15:0];
+                'h104: header_completID     <= apb_if.pwdata[31:16];
             endcase
         end
     end
@@ -81,11 +81,11 @@ module SAL_CFG
     // output assignments
     assign  ch0_start_o             = ch0_start;
     
-    assign  header_fmt_o            = header_fmt;
-    assign  header_type_o           = header_type;
-    assign  header_tc_o             = header_tc;
-    assign  header_length_o         = header_length;
-    assign  header_requestID_o      = header_requestID;
-    assign  header_completID_o      = header_completID;
+    assign  header_fmt_c            = header_fmt;
+    assign  header_type_c           = header_type;
+    assign  header_tc_c             = header_tc;
+    assign  header_length_c         = header_length;
+    assign  header_requestID_c      = header_requestID;
+    assign  header_completID_c      = header_completID;
 
 endmodule
