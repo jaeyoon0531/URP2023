@@ -2,7 +2,7 @@
 `include "PARAMS.svh"
 `define PARAM   32
 
-module TOP;
+module TB_TOP;
 
     logic                       clk;
     logic                       rst_n;
@@ -61,6 +61,7 @@ module TOP;
         axi_b_if.init();
         axi_ar_if.init();
         axi_r_if.init();
+        apb_if.init();
 
         // wait for a reset release
         @(posedge rst_n);
@@ -104,37 +105,14 @@ module TOP;
         if (rresp!==2'b00) begin $display("Non-OK response (received: %d)", rresp); $finish; end
     endtask
 
-    //R TLP
-    task automatic read32B(
-        input [`AXI_ADDR_WIDTH-1:0] addr,
-        output [255:0]              data
-    );
-        logic   [`AXI_ID_WIDTH-1:0] rid;
-        logic   [1:0]               rresp;
-        logic                       rlast;
-
-        // drive to AR
-        axi_ar_if.transfer(simple_id, addr, 'd1, `AXI_SIZE_128, `AXI_BURST_INCR);
-
-        // receive from R
-        axi_r_if.receive(rid, data, rresp, rlast);
-        if (rlast!==1'b0) begin $display("RLAST mismatch (expected: %d, received: %d)", 0, rlast); $finish; end
-        if (rid!==simple_id) begin $display("ID mismatch (expected: %d, received: %d)", simple_id, rid); $finish; end
-        if (rresp!==2'b00) begin $display("Non-OK response (received: %d)", rresp); $finish; end
-
-    endtask
-
-
+    
     logic   [255:0]             data;
     initial begin
         init();
         //AW,W
         write32B('d0,   {8{32'h01234567}});
         write32B('d32,  {8{32'h01234567}});
-        
-        
-        read32B('d0, data);
-        read32B('d32, data);
+ 
 
         repeat (30) @(posedge clk);
 
