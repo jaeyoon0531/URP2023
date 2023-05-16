@@ -36,6 +36,15 @@ module TB_TOP;
     axi_id_t                        simple_id;
     axi_id_t                        rid;
     axi_resp_t                      rresp;
+    
+    reg    [2:0]                    header_fmt_o;
+    reg    [4:0]                    header_type_o;
+    reg    [2:0]                    header_tc_o;
+    reg    [8:0]                    header_length_o;
+    reg    [15:0]                   header_requestID_o;
+    reg    [15:0]                   header_completID_o;
+    reg    [1023:0]                 data_o;
+    reg    [31:0]                   addr_o;
 
 
     PCIe                            u_pcie
@@ -51,7 +60,16 @@ module TB_TOP;
         .axi_aw_if                  (axi_aw_if),
         .axi_w_if                   (axi_w_if),
         .axi_b_if                   (axi_b_if),
-        .axi_r_if                   (axi_r_if)
+        .axi_r_if                   (axi_r_if),
+        
+        .header_fmt_o               (header_fmt_o),
+        .header_type_o              (header_type_o),
+        .header_tc_o                (header_tc_o),
+        .header_length_o            (header_length_o),
+        .header_requestID_o         (header_requestID_o),
+        .header_completID_o         (header_completID_o),
+        .data_out                   (data_o),
+        .addr_out                   (addr_o) 
     );
 
     
@@ -74,7 +92,7 @@ module TB_TOP;
     assign  simple_id                   = 'd0;
 
 
-    //AW,W TLP
+    //AW,W,CFG TLP
     task automatic write32B(
         //AW
         input [`AXI_ADDR_WIDTH-1:0] addr,
@@ -107,6 +125,7 @@ module TB_TOP;
 
     
     logic   [255:0]             data;
+    
     initial begin
         init();
         //AW,W
@@ -118,7 +137,5 @@ module TB_TOP;
 
         $finish;
     end
-
-      
 
 endmodule
