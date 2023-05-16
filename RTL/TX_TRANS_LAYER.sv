@@ -15,27 +15,32 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 module TX_TRANS_LAYER (
-  input wire          clk,
-  input wire          reset_n,
+  input wire                    clk,
+  input wire                    reset_n,
   
   //software interface
-  AXI_W_IF.DST        axi_w_if,
-  AXI_A_IF.DST        axi_aw_if,
-  AXI_A_IF.DST        axi_ar_if,
+  AXI_W_IF.DST                  axi_w_if,
+  AXI_A_IF.DST                  axi_aw_if,
   
+  input  wire  [2:0]            header_fmt_i,
+  input  wire  [4:0]            header_type_i,
+  input  wire  [2:0]            header_tc_i,
+  input  wire  [8:0]            header_length_i,
+  input  wire  [15:0]           header_requestID_i,
+  input  wire  [15:0]           header_completID_i,
+   
   //data link layer interface
-  output reg [63:0]   tlp_out,
-  output reg          tlp_out_valid,
-  input  reg          tlp_in_ready
+  output reg   [1023:0]         tlp_out,
+  output reg                    tlp_out_valid,
+  input  wire                   tlp_in_ready
   
 );
-
 
 
     /*
     * FILL YOUR CODES HERE
     */
-
+    // Packetizer / FIFO*2 / Arbiter
   
   
 endmodule
