@@ -1,3 +1,25 @@
+`timescale 1ns / 1ps
+//////////////////////////////////////////////////////////////////////////////////
+// Company: 
+// Engineer: 
+// 
+// Create Date: 2023/05/16 16:07:53
+// Design Name: 
+// Module Name: PCIe
+// Project Name: 
+// Target Devices: 
+// Tool Versions: 
+// Description: 
+// 
+// Dependencies: 
+// 
+// Revision:
+// Revision 0.01 - File Created
+// Additional Comments:
+// 
+//////////////////////////////////////////////////////////////////////////////////
+
+
 module PCIe
 (
     // clock & reset
@@ -25,9 +47,12 @@ module PCIe
     wire                            ack;
     wire                            nack;
     
-    wire    [31:0]                  src_addr_vec;
-    wire    [31:0]                  dst_addr_vec;
-    wire    [15:0]                  byte_len_vec;
+    wire    [2:0]                   header_fmt;
+    wire    [4:0]                   header_type;
+    wire    [2:0]                   header_tc;
+    wire    [8:0]                   header_length;
+    wire    [15:0]                  header_requestID;
+    wire    [15:0]                  header_completID; 
     wire                            start_vec;
     wire                            done_vec;
     
@@ -39,9 +64,12 @@ module PCIe
 
         .apb_if                     (apb_if),
         
-        .ch0_src_addr_o             (src_addr_vec),
-        .ch0_dst_addr_o             (dst_addr_vec),
-        .ch0_byte_len_o             (byte_len_vec),
+        .header_fmt_o               (src_addr_vec),
+        .header_type_o              (dst_addr_vec),
+        .header_tc_o                (byte_len_vec),
+        .header_length_o            (header_length),
+        .header_requestID_o         (header_requestID),
+        .header_completID_o         (header_completID),
         .ch0_start_o                (start_vec),
         .ch0_done_i                 (done_vec)
     );
