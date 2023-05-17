@@ -31,7 +31,7 @@ module SAL_CFG
     // APB interface
     APB_IF.SLV                  apb_if,
     
-    // configuration registers for CH0
+    // configuration registers for header
     output  reg     [2:0]       header_fmt_c,
     output  reg     [4:0]       header_type_c,
     output  reg     [2:0]       header_tc_c,
@@ -42,7 +42,6 @@ module SAL_CFG
    
 );
 
-    // Configuration register for CH0 to read/write
     reg     [2:0]                header_fmt;
     reg     [4:0]                header_type;
     reg     [2:0]                header_tc;
