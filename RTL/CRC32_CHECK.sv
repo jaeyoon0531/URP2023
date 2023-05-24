@@ -26,6 +26,7 @@ module crc32_check (
     input wire [31:0]           data_in,
     input wire                  data_in_valid,
     input wire                  crc_valid,
+    input wire [31:0]           lcrc_in,
     output reg                  crc_check_passed
 );
 
@@ -50,7 +51,7 @@ module crc32_check (
             end
 
             if (crc_valid) begin
-                crc_check_passed <= (crc_reg == ~data_in); //correct:1, error: 0
+                crc_check_passed <= (crc_reg == ~lcrc_in); //correct:1, error: 0
                 crc_reg <= 32'hFFFFFFFF; // Reset the CRC register for the next packet
             end
         end
