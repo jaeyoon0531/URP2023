@@ -111,7 +111,7 @@ module TB_TOP;
             end
             //APB
             begin
-                apb_if.write(addr, header);
+                apb_if.write(header);
             end
         join
 
