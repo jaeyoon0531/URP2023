@@ -1,5 +1,5 @@
 `include "TIME_SCALE.svh"
-`include "SAL_DDR_PARAMS.svh"
+`include "PARAMS.svh"
 
 // For clocking block (verification part)
 // sample -0.1ns before a posedge
