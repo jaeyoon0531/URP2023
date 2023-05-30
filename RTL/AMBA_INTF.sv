@@ -402,12 +402,13 @@ interface APB_IF (
     endtask
 
     task automatic write (
-        input    [31:0]  addr,
+        //input    [31:0]  addr,
         input    [31:0]  data
     );
         MST_CB.psel                 <= 1'b1;
         MST_CB.penable              <= 1'b0;
-        MST_CB.paddr                <= addr;
+        //MST_CB.paddr                <= addr;
+        MST_CB.paddr                <= 1'b1;
         MST_CB.pwrite               <= 1'b1;
         MST_CB.pwdata               <= data;
         @(posedge clk);
