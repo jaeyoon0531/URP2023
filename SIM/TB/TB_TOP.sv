@@ -88,11 +88,12 @@ module TB_TOP;
 
 
     //AW,W,CFG TLP
-    task automatic write32B(
+    task automatic write(
         //AW
-        input [`AXI_ADDR_WIDTH-1:0] addr,
+        input [31:0] addr,
         //W
-        input [255:0]               data
+        input [127:0]               data,
+        input [95:0]               header
     );
         logic   [`AXI_ID_WIDTH-1:0] rid;
         logic   [1:0]               rresp;
@@ -101,17 +102,21 @@ module TB_TOP;
         fork
             //AW
             begin
-                axi_aw_if.transfer(simple_id, addr, 'd1, `AXI_SIZE_128, `AXI_BURST_INCR);
+                axi_aw_if.send(simple_id, addr, 'd1, `AXI_SIZE_128, `AXI_BURST_INCR);
             end
             //W
             begin
-                axi_w_if.transfer(simple_id, data[127:0], 16'hFFFF, 1'b0);
-                axi_w_if.transfer(simple_id, data[255:128], 16'hFFFF, 1'b1);
+                axi_w_if.send(simple_id, data, 16'hFFFF, 1'b0);
+                //axi_w_if.send(simple_id, data[255:128], 16'hFFFF, 1'b1);
+            end
+            //APB
+            begin
+                apb_if.write(addr, header);
             end
         join
 
         // receive from B
-        axi_b_if.receive(rid, rresp);
+        axi_b_if.recv(rid, rresp);
 
         // check responses
         if (rid!==simple_id) begin $display("ID mismatch (expected: %d, received: %d)", simple_id, rid); $finish; end
@@ -119,13 +124,13 @@ module TB_TOP;
     endtask
 
     
-    logic   [255:0]             data;
+    logic   [127:0]             data;
     
     initial begin
         init();
-        //AW,W
-        write32B('d0,   {8{32'h01234567}});
-        write32B('d32,  {8{32'h01234567}});
+        //AW,W,APB
+        write('d0,   {4{32'h01234567}}, {3{32'h01234567}});
+        write('d32,  {4{32'h01234567}}, {3{32'h01234567}});
  
 
         repeat (30) @(posedge clk);
