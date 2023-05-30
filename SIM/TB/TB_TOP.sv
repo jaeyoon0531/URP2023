@@ -94,9 +94,9 @@ module TB_TOP;
         //W
         input [127:0]               data,
         //APB
-        input [95:0]                header
+        input [95:0]                header,
         //ID
-        input [`AXI_ID_WIDTH-1:0]   f_id;
+        input [`AXI_ID_WIDTH-1:0]   f_id
         
     );
         logic   [`AXI_ID_WIDTH-1:0] rid;
