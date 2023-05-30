@@ -27,7 +27,7 @@ module PCIe
     input                           rst_n,
 
     // APB interface
-    APB_IF.DST                      apb_if,
+    APB_IF.SLV                      apb_if,
 
     // AXI interface
     AXI_A_IF.DST                    axi_ar_if,
