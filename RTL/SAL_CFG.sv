@@ -63,7 +63,7 @@ module SAL_CFG
         end
         else if(wren) begin 
             case(apb_if.paddr)
-                'h1: header_fmt           <= apb_if.pwdata[2:0];
+                'h1: header_fmt           <= apb_if.pwdata[95:94];
                 'h1: header_type          <= apb_if.pwdata[7:3];
                 'h1: header_tc            <= apb_if.pwdata[10:8]; 
                 'h1: header_length        <= apb_if.pwdata[17:9];
