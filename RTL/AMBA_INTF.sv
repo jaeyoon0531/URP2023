@@ -351,7 +351,7 @@ interface APB_IF (
     logic                       penable;
     logic   [31:0]              paddr;
     logic                       pwrite;
-    logic   [31:0]              pwdata;
+    logic   [127:0]             pwdata;
     logic                       pready;
     logic   [31:0]              prdata;
     logic                       pslverr;
@@ -403,7 +403,7 @@ interface APB_IF (
 
     task automatic write (
         //input    [31:0]  addr,
-        input    [31:0]  data
+        input    [127:0]  data
     );
         MST_CB.psel                 <= 1'b1;
         MST_CB.penable              <= 1'b0;
