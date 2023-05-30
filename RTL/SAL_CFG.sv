@@ -63,12 +63,12 @@ module SAL_CFG
         end
         else if(wren) begin 
             case(apb_if.paddr)
-                'h1: header_fmt           <= apb_if.pwdata[95:94];
-                'h1: header_type          <= apb_if.pwdata[7:3];
-                'h1: header_tc            <= apb_if.pwdata[10:8]; 
-                'h1: header_length        <= apb_if.pwdata[17:9];
-                'h1: header_requestID     <= apb_if.pwdata[15:0];
-                'h1: header_completID     <= apb_if.pwdata[31:16];
+                'h1: header_fmt           <= apb_if.pwdata[95:93];
+                'h1: header_type          <= apb_if.pwdata[92:88];
+                'h1: header_tc            <= apb_if.pwdata[87:85]; 
+                'h1: header_length        <= apb_if.pwdata[84:76];
+                'h1: header_requestID     <= apb_if.pwdata[63:48];
+                'h1: header_completID     <= apb_if.pwdata[47:32];
             endcase
         end
     end
