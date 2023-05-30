@@ -95,6 +95,9 @@ module TB_TOP;
         input [127:0]               data,
         //APB
         input [95:0]                header
+        //ID
+        input [`AXI_ID_WIDTH-1:0]   id;
+        
     );
         logic   [`AXI_ID_WIDTH-1:0] rid;
         logic   [1:0]               rresp;
@@ -103,11 +106,11 @@ module TB_TOP;
         fork
             //AW
             begin
-                axi_aw_if.send(simple_id, addr, 'd1, `AXI_SIZE_128, `AXI_BURST_INCR);
+                axi_aw_if.send(id, addr, 'd1, `AXI_SIZE_128, `AXI_BURST_INCR);
             end
             //W
             begin
-                axi_w_if.send(simple_id, data, 16'hFFFF, 1'b0);
+                axi_w_if.send(id, data, 16'hFFFF, 1'b0);
                 //axi_w_if.send(simple_id, data[255:128], 16'hFFFF, 1'b1);
             end
             //APB
@@ -120,7 +123,8 @@ module TB_TOP;
         axi_b_if.recv(rid, rresp);
 
         // check responses
-        if (rid!==simple_id) begin $display("ID mismatch (expected: %d, received: %d)", simple_id, rid); $finish; end
+        //if (rid!==simple_id) begin $display("ID mismatch (expected: %d, received: %d)", simple_id, rid); $finish; end
+        if (rid!==id) begin $display("ID mismatch (expected: %d, received: %d)", id, rid); $finish; end
         if (rresp!==2'b00) begin $display("Non-OK response (received: %d)", rresp); $finish; end
     endtask
 
@@ -130,8 +134,12 @@ module TB_TOP;
     initial begin
         init();
         //AW,W,APB
-        write('d0,   {4{32'h01234567}}, {3{32'h01234567}});
-        write('d32,  {4{32'h01234567}}, {3{32'h01234567}});
+        write('d0,   {4{32'h01234567}}, {3{32'h01234567}}, 0);
+        write('d32,  {4{32'h01234567}}, {3{32'h01234567}}, 1);
+        write('d0,   {4{32'h01234567}}, {3{32'h01234567}}, 2);
+        write('d32,  {4{32'h01234567}}, {3{32'h01234567}}, 3);
+        write('d0,   {4{32'h01234567}}, {3{32'h01234567}}, 4);
+        write('d32,  {4{32'h01234567}}, {3{32'h01234567}}, 5);
  
 
         repeat (30) @(posedge clk);
