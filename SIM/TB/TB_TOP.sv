@@ -90,10 +90,10 @@ module TB_TOP;
     //AW,W,CFG TLP
     task automatic write(
         //AW
-        input [31:0] addr,
+        input [31:0]                addr,
         //W
         input [127:0]               data,
-        input [95:0]               header
+        input [95:0]                header
     );
         logic   [`AXI_ID_WIDTH-1:0] rid;
         logic   [1:0]               rresp;
