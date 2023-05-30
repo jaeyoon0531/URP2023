@@ -31,12 +31,7 @@ module TB_TOP;
     AXI_A_IF                        axi_aw_if   (.clk(clk), .rst_n(rst_n));
     AXI_W_IF                        axi_w_if    (.clk(clk), .rst_n(rst_n));
     AXI_B_IF                        axi_b_if    (.clk(clk), .rst_n(rst_n));
-    
-    
-    axi_id_t                        simple_id;
-    axi_id_t                        rid;
-    axi_resp_t                      rresp;
-    
+     
     reg    [2:0]                    header_fmt_o;
     reg    [4:0]                    header_type_o;
     reg    [2:0]                    header_tc_o;
