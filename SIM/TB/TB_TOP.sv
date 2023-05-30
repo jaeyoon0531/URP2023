@@ -93,6 +93,7 @@ module TB_TOP;
         input [31:0]                addr,
         //W
         input [127:0]               data,
+        //APB
         input [95:0]                header
     );
         logic   [`AXI_ID_WIDTH-1:0] rid;
