@@ -35,7 +35,7 @@ module TX_DATA_LINK_LAYER (
     input   wire                      tlp_data_in_ready,
     input   wire [31:0]               dllp,
     input   wire                      dllp_valid,
-    output  wire                      dllp_ready
+    output  reg                       dllp_ready
 );
 
     
