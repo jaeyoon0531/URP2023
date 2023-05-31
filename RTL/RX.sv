@@ -27,8 +27,10 @@ module RX (
     // Data Link Layer Interface
     input   wire    [1023:0]         rx_tlp_data,
     input   wire                     rx_tlp_valid,
+    input   wire                     dllp_ready,
     output  wire                     rx_tlp_ready,
     output  wire    [31:0]           dllp_o,
+    output  wire                     dllp_valid,
     
     // Transaction Layer Interface
     //AXI_R_IF.SRC                axi_r_if,
