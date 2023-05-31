@@ -113,8 +113,8 @@ module PCIe
         .rx_tlp_valid               (out_valid_TX_to_RX),
         .rx_tlp_ready               (in_ready_RX_to_TX),
         .dllp_i                     (dllp),
-        .dllp_ready_o               (dllp_ready),
-        .dllp_valid_i               (dllp_valid)
+        .dllp_ready                 (dllp_ready),
+        .dllp_valid                 (dllp_valid)
         
     );
     
@@ -128,8 +128,8 @@ module PCIe
         .rx_tlp_valid               (out_valid_TX_to_RX),
         .rx_tlp_ready               (in_ready_RX_to_TX),
         .dllp_o                     (dllp),
-        .dllp_valid_o               (dllp_valid),
-        .dllp_ready_i               (dllp_ready),
+        .dllp_valid                 (dllp_valid),
+        .dllp_ready                 (dllp_ready),
         
         // Transaction Layer Interface
         //.axi_r_if                   (axi_r_if),
