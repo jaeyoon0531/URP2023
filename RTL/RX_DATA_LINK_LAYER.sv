@@ -27,8 +27,11 @@ module RX_DATA_LINK_LAYER(
     // Physical Layer interface
     input  wire [1023:0]        tlp_data_in,
     input  wire                 tlp_data_in_valid,
+    input  wire                 dllp_ready,
     output reg                  tlp_data_out_ready,
     output reg  [31:0]          dllp,
+    output reg                  dllp_valid,
+    
     
     // Transaction Layer interface
     output reg [1023:0]         tlp_data_out,
