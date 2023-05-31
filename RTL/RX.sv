@@ -61,6 +61,8 @@ module RX (
         .tlp_data_in_valid          (rx_tlp_valid),
         .tlp_data_out_ready         (rx_tlp_ready),
         .dllp                       (dllp_o),
+        .dllp_valid                 (dllp_valid),
+        .dllp_ready                 (dllp_ready),
 
         //transaction interface
         .tlp_data_out               (out_data_dll),
