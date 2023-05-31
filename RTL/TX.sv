@@ -40,6 +40,8 @@ module TX (
     output  wire                    rx_tlp_valid,
     input   wire                    rx_tlp_ready,
     input   wire [31:0]             dllp_i
+    input   wire                    dllp_valid,
+    output  wire                    dllp_ready
     
 );
 
@@ -84,8 +86,9 @@ module TX (
         .tlp_data_out               (rx_tlp_data),
         .tlp_data_out_valid         (rx_tlp_valid),
         .tlp_data_in_ready          (rx_tlp_ready),
-        .dllp                       (dllp_i)
-  
+        .dllp                       (dllp_i),
+        .dllp_ready                 (dllp_ready),
+        .dllp_valid                 (dllp_valid)
     );
 
 endmodule
