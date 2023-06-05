@@ -76,15 +76,15 @@ module TB_TOP;
         axi_r_if.init();
         apb_if.init();
 
-        // wait for a reset release
         @(posedge rst_n);
-
-        // wait enough cycles for DRAM to finish their initialization
-        repeat (250) @(posedge clk);
+  
+        repeat (5) @(posedge clk);
     endtask
 
-    logic       [`AXI_ID_WIDTH-1:0]     simple_id;
-    assign  simple_id                   = 'd0;
+    //logic       [`AXI_ID_WIDTH-1:0]     simple_id;
+    //assign  simple_id                   = 'd0;
+    logic       [`AXI_ID_WIDTH-1:0]     f_id;
+    assign  f_id                        = 'd0;
 
 
     //AW,W,CFG TLP
@@ -99,7 +99,8 @@ module TB_TOP;
         input [`AXI_ID_WIDTH-1:0]   f_id
         
     );
-        logic   [`AXI_ID_WIDTH-1:0] rid;
+        logic   [`AXI_ID_WIDTH-1:0] rid
+        
         logic   [1:0]               rresp;
 
         // drive to AW and W
