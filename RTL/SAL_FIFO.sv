@@ -108,7 +108,7 @@ module SAL_FIFO #(
                                      &(wrptr_n[DEPTH_LG2-1:0]==rdptr_n[DEPTH_LG2-1:0]);
         afull_n                     = (cnt_n >= AFULL_THRES);
         empty_n                     = (wrptr_n == rdptr_n);
-        aempty_n                    = (cnt_n <= AFULL_THRES);
+        aempty_n                    = (cnt_n <= AEMPTY_THRES);
     end
 
     // synthesis translate_off
