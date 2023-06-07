@@ -99,7 +99,7 @@ module TB_TOP;
         input [`AXI_ID_WIDTH-1:0]   f_id
         
     );
-        logic   [`AXI_ID_WIDTH-1:0] rid
+        logic   [`AXI_ID_WIDTH-1:0] rid;
         
         logic   [1:0]               rresp;
 
