@@ -39,7 +39,7 @@ module TX (
     output  wire [1023:0]           rx_tlp_data,
     output  wire                    rx_tlp_valid,
     input   wire                    rx_tlp_ready,
-    input   wire [31:0]             dllp_i
+    input   wire [31:0]             dllp_i,
     input   wire                    dllp_valid,
     output  wire                    dllp_ready
     
